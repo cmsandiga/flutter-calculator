@@ -5,113 +5,281 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: "Flutter Calculator",
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+          primarySwatch: Colors.blue, backgroundColor: Colors.black26),
+      home: CalculatorHomePage(title: "Flutter Calculator"),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
+class CalculatorHomePage extends StatefulWidget {
   final String title;
 
+  CalculatorHomePage({Key key, this.title}) : super(key: key);
+
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return new _CalculatorHomePageState();
+  }
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _CalculatorHomePageState extends State<CalculatorHomePage> {
+  String _str = "0";
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+  void add(String a) {}
+
+  void deleteAll() {}
+
+  void deleteOne() {}
+
+  void getResult() {}
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+      appBar: AppBar(title: Text(widget.title)),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            flex: 2,
+            child: Card(
+              color: Colors.lightGreen[50],
+              child: Padding(
+                padding: EdgeInsets.all(15.0),
+                child: Text(
+                  _str,
+                  textScaleFactor: 2.0,
+                ),
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
+          ),
+          Expanded(
+              flex: 1,
+              child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(
+                        flex: 3,
+                        child: FlatButton(
+                          child:
+                              Text("C", style: TextStyle(color: Colors.white)),
+                          onPressed: () {
+                            deleteAll();
+                          },
+                          color: Colors.black54,
+                        )),
+                    Expanded(
+                        flex: 1,
+                        child: FlatButton(
+                          child:
+                              Text("<-", style: TextStyle(color: Colors.white)),
+                          onPressed: () {
+                            deleteOne();
+                          },
+                          color: Colors.black87,
+                        ))
+                  ])),
+          Expanded(
+              flex: 4,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        ExpandedRow(
+                          crossAxisAlignment:  CrossAxisAlignment.stretch,
+                          children: [
+                            ExpandedButton(
+                              child: Text("7",
+                                  style: TextStyle(color: Colors.white)),
+                              onPressed: () {
+                                add("7");
+                              },
+                              color: Colors.blueAccent,
+                            ),
+                            ExpandedButton(
+                              child: Text("8",
+                                  style: TextStyle(color: Colors.white)),
+                              onPressed: () {
+                                add("8");
+                              },
+                              color: Colors.blueAccent,
+                            ),
+                            ExpandedButton(
+                              child: Text("9",
+                                  style: TextStyle(color: Colors.white)),
+                              onPressed: () {
+                                add("9");
+                              },
+                              color: Colors.blueAccent,
+                            )
+                          ],
+                        ),
+                        ExpandedRow(
+                          crossAxisAlignment:  CrossAxisAlignment.stretch,
+                          children: [
+                            ExpandedButton(
+                                child: Text("4",
+                                    style: TextStyle(color: Colors.white)),
+                                onPressed: () {
+                                  add("4");
+                                },
+                                color: Colors.blueAccent),
+                            ExpandedButton(
+                                child: Text("5",
+                                    style: TextStyle(color: Colors.white)),
+                                onPressed: () {
+                                  add("5");
+                                },
+                                color: Colors.blueAccent),
+                            ExpandedButton(
+                              child: Text("6",
+                                  style: TextStyle(color: Colors.white)),
+                              onPressed: () {
+                                add("6");
+                              },
+                              color: Colors.blueAccent,
+                            )
+                          ],
+                        ),
+                        ExpandedRow(
+                          crossAxisAlignment:  CrossAxisAlignment.stretch,
+                          children: [
+                            ExpandedButton(
+                              child: Text("1",
+                                  style: TextStyle(color: Colors.white)),
+                              onPressed: () {
+                                add("1");
+                              },
+                              color: Colors.blueAccent,
+                            ),
+                            ExpandedButton(
+                              child: Text("2",
+                                  style: TextStyle(color: Colors.white)),
+                              onPressed: () {
+                                add("2");
+                              },
+                              color: Colors.blueAccent,
+                            ),
+                            ExpandedButton(
+                              child: Text("3",
+                                  style: TextStyle(color: Colors.white)),
+                              onPressed: () {
+                                add("3");
+                              },
+                              color: Colors.blueAccent,
+                            )
+                          ],
+                        ),
+                        ExpandedRow(
+                          crossAxisAlignment:  CrossAxisAlignment.stretch,
+                          children: [
+                            ExpandedButton(
+                              child: Text("0",
+                                  style: TextStyle(color: Colors.white)),
+                              onPressed: () {
+                                add("0");
+                              },
+                              color: Colors.blueAccent,
+                            ),
+                            ExpandedButton(
+                              child: Text(".",
+                                  style: TextStyle(color: Colors.white)),
+                              onPressed: () {
+                                add(".");
+                              },
+                              color: Colors.blueAccent,
+                            ),
+                            ExpandedButton(
+                              child: Text("=",
+                                  style: TextStyle(color: Colors.white)),
+                              onPressed: () {
+                                getResult();
+                              },
+                              color: Colors.blue[50],
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                      flex: 1,
+                      child: Column(
+                        children: [
+                          ExpandedButton(
+                            child: Image.network(
+                              "https://www.carminezacc.com/divide.png",
+                              width: 10.0,
+                              height: 10.0,
+                            ),
+                            onPressed: () {
+                              add("%");
+                            },
+                          ),
+                          ExpandedButton(
+                            child: Text("x"),
+                            onPressed: () {
+                              add("x");
+                            },
+                          ),
+                          ExpandedButton(
+                            child: Text("-"),
+                            onPressed: () {
+                              add("-");
+                            },
+                          ),
+                          ExpandedButton(
+                            child: Text("+"),
+                            onPressed: () {
+                              add("+");
+                            },
+                          )
+                        ],
+                      ))
+                ],
+              )),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+}
+
+class ExpandedButton extends StatelessWidget {
+  final Widget child;
+  final VoidCallback onPressed;
+  final Color color;
+
+  ExpandedButton({this.child, this.onPressed, this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return new Expanded(
+        flex: 1,
+        child: FlatButton(onPressed: onPressed, child: child, color: color));
+  }
+}
+
+class ExpandedRow extends StatelessWidget {
+  final List<Widget> children;
+  final CrossAxisAlignment crossAxisAlignment;
+
+  ExpandedRow({this.children, this.crossAxisAlignment});
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return new Expanded(
+        flex: 1,
+        child: Row(children: children, crossAxisAlignment: crossAxisAlignment));
   }
 }
