@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'calculator.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,14 +31,35 @@ class CalculatorHomePage extends StatefulWidget {
 
 class _CalculatorHomePageState extends State<CalculatorHomePage> {
   String _str = "0";
+  var _calculation = Calculation();
 
-  void add(String a) {}
+  void add(String a) {
+    setState(() {
+      _calculation.add(a);
+      _str = _calculation.getString();
+    });
+  }
 
-  void deleteAll() {}
+  void deleteAll() {
+    setState(() {
+      _calculation.deleteAll();
+      _str = _calculation.getString();
+    });
+  }
 
-  void deleteOne() {}
+  void deleteOne() {
+    setState(() {
+      _calculation.deleteOne();
+      _str = _calculation.getString();
+    });
+  }
 
-  void getResult() {}
+  void getResult() {
+    setState(() {
+      _str = _calculation.getResult().toString();
+      
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -223,7 +245,7 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
                               height: 10.0,
                             ),
                             onPressed: () {
-                              add("%");
+                              add("/");
                             },
                           ),
                           ExpandedButton(
